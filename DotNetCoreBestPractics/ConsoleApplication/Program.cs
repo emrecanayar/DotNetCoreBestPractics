@@ -20,5 +20,5 @@ using ConsoleApplication;
 
 BenchmarkRunner.Run<CollectionMethods>();
 CollectionMethods collectionMethods = new CollectionMethods();
-collectionMethods.HasSkodaForCount();
-collectionMethods.HasSkodaForAny();
+collectionMethods.NormalForEach();
+collectionMethods.PararelForEach();

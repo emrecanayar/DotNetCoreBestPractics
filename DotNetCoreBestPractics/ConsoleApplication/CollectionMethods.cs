@@ -4,14 +4,52 @@ namespace ConsoleApplication
 {
     public class CollectionMethods
     {
+        //[Benchmark]
+        ///// <summary>
+        ///// Yanlış Kullanım
+        ///// </summary>
+        ///// <returns></returns>
+        //public bool HasSkodaForCount()
+        //{
+        //    IEnumerable<Car> cars = new List<Car>
+        //    {
+        //        new Car { Name = "Octavia", Brand = "Skoda", BrandName = "Skoda", Year = 2018 },
+        //        new Car { Name = "Passat", Brand = "Volkswagen", BrandName = "Volkswagen", Year = 2018 },
+        //        new Car { Name = "Golf", Brand = "Volkswagen", BrandName = "Volkswagen", Year = 2018 },
+        //        new Car { Name = "Astra", Brand = "Opel", BrandName = "Opel", Year = 2018 },
+        //        new Car { Name = "Corsa", Brand = "Opel", BrandName = "Opel", Year = 2018 },
+        //        new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+
+        //    };
+
+        //    return cars.Count(x => x.Brand == "Skoda") > 0;
+        //}
+
+        //[Benchmark(Baseline = true)]
+        ///// <summary>
+        ///// Doğru Kullanım
+        ///// </summary>
+        ///// <returns></returns>
+        //public bool HasSkodaForAny()
+        //{
+        //    IEnumerable<Car> cars = new List<Car>
+        //    {
+        //        new Car { Name = "Octavia", Brand = "Skoda", BrandName = "Skoda", Year = 2018 },
+        //        new Car { Name = "Passat", Brand = "Volkswagen", BrandName = "Volkswagen", Year = 2018 },
+        //        new Car { Name = "Golf", Brand = "Volkswagen", BrandName = "Volkswagen", Year = 2018 },
+        //        new Car { Name = "Astra", Brand = "Opel", BrandName = "Opel", Year = 2018 },
+        //        new Car { Name = "Corsa", Brand = "Opel", BrandName = "Opel", Year = 2018 },
+        //        new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+
+        //    };
+
+        //    return cars.Any(x => x.Brand == "Skoda");
+
+        //}
         [Benchmark]
-        /// <summary>
-        /// Yanlış Kullanım
-        /// </summary>
-        /// <returns></returns>
-        public bool HasSkodaForCount()
+        public void NormalForEach()
         {
-            IEnumerable<Car> cars = new List<Car>
+            IList<Car> cars = new List<Car>
             {
                 new Car { Name = "Octavia", Brand = "Skoda", BrandName = "Skoda", Year = 2018 },
                 new Car { Name = "Passat", Brand = "Volkswagen", BrandName = "Volkswagen", Year = 2018 },
@@ -19,20 +57,26 @@ namespace ConsoleApplication
                 new Car { Name = "Astra", Brand = "Opel", BrandName = "Opel", Year = 2018 },
                 new Car { Name = "Corsa", Brand = "Opel", BrandName = "Opel", Year = 2018 },
                 new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
-
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 }
             };
 
-            return cars.Count(x => x.Brand == "Skoda") > 0;
+            foreach (Car car in cars)
+            {
+                Console.WriteLine(car.Year);
+            }
         }
 
         [Benchmark(Baseline = true)]
-        /// <summary>
-        /// Doğru Kullanım
-        /// </summary>
-        /// <returns></returns>
-        public bool HasSkodaForAny()
+        public void PararelForEach()
         {
-            IEnumerable<Car> cars = new List<Car>
+            IList<Car> cars = new List<Car>
             {
                 new Car { Name = "Octavia", Brand = "Skoda", BrandName = "Skoda", Year = 2018 },
                 new Car { Name = "Passat", Brand = "Volkswagen", BrandName = "Volkswagen", Year = 2018 },
@@ -40,12 +84,22 @@ namespace ConsoleApplication
                 new Car { Name = "Astra", Brand = "Opel", BrandName = "Opel", Year = 2018 },
                 new Car { Name = "Corsa", Brand = "Opel", BrandName = "Opel", Year = 2018 },
                 new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
-
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 },
+                new Car { Name = "Focus", Brand = "Ford", BrandName = "Ford", Year = 2018 }
             };
 
-            return cars.Any(x => x.Brand == "Skoda");
-
+            Parallel.ForEach(cars, car =>
+            {
+                Console.WriteLine(car.Year);
+            });
         }
+
     }
 
     public class Car
